@@ -37,51 +37,53 @@ DispatchQueue.global(qos: .background).async {
     sleep(2)
 //#-end-hidden-code
     
-    func quickSort(array: VisualSortableArray, left: Int, right: Int)
-    {
-        let index = partition(arr: array, left: left, right: right)
+    func quickSort(array: VisualSortableArray, fromLeftIndex leftIndex: Int, toRightIndex rightIndex: Int) {
+        let index = partition(array: array, fromLeftIndex: leftIndex, toRightIndex: rightIndex)
         
-        if left < index - 1 {
-            quickSort(array: array, left: left, right: index - 1)
+        if leftIndex < index - 1 {
+            quickSort(array: array, fromLeftIndex: leftIndex, toRightIndex: index - 1)
         }
         
-        if index < right {
-            quickSort(array: array, left: index, right: right)
+        if index < rightIndex {
+            quickSort(array: array, fromLeftIndex: index, toRightIndex: rightIndex)
         }
     }
     
-    func partition(arr: VisualSortableArray, left: Int, right: Int) -> Int
-    {
-        var i = left
-        var j = right
-        let pivot = elementAt(index: (left + right) / 2)
+    func partition(array: VisualSortableArray, fromLeftIndex leftIndex: Int, toRightIndex rightIndex: Int) -> Int {
+        var localLeftIndex = leftIndex
+        var localRightIndex = rightIndex
         
-        while i <= j {
-            while elementAt(index: i) < pivot {
-                i += 1
-                select(i: i, j: j)
+        let pivot = elementAt(index: (localLeftIndex + localRightIndex) / 2)
+        
+        while localLeftIndex <= localRightIndex {
+            
+            while elementAt(index: localLeftIndex) < pivot {
+                localLeftIndex += 1
+                select(i: localLeftIndex, j: localRightIndex)
             }
             
-            while j > 0 && arr.get(index:j) > pivot {
-                j -= 1
-                select(i: i, j: j)
+            while localRightIndex > 0 && elementAt(index: localRightIndex) > pivot {
+                localRightIndex -= 1
+                select(i: localLeftIndex, j: localRightIndex)
             }
             
-            if i <= j {
-                if i != j {
-                    swap(i: i, j: j)
+            if localLeftIndex <= localRightIndex {
+                if localLeftIndex != localRightIndex {
+                    swap(i: localLeftIndex, j: localRightIndex)
                 }
-                i += 1
-                if j > 0 {
-                    j -= 1
-                    select(i: i, j: j)
+                
+                localLeftIndex += 1
+                
+                if localRightIndex > 0 {
+                    localRightIndex -= 1
+                    select(i: localLeftIndex, j: localRightIndex)
                 }
             }
         }
-        return i
+        return localLeftIndex
     }
     
-    quickSort(array: array, left: 0, right: array.count - 1)
+    quickSort(array: array, fromLeftIndex: 0, toRightIndex: array.count - 1)
 
     
 //#-hidden-code
