@@ -11,7 +11,7 @@ func elementAt(index: Int) -> Int {
     return array.get(index: index)
 }
 
-func swap(i: Int, j: Int) -> Bool{
+func swap(i: Int, j: Int){
     return array.swap(i: i, j: j)
 }
 

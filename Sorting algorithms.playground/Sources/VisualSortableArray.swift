@@ -55,21 +55,21 @@ public class  VisualSortableArray{
 //     at first they were returning void (as they should) but this caused them to allocate massive amounts of memory
 //     and crash on the ipad
     
-//     public func swap(i: Int, j: Int){ //this method seems to leak memory
-//        view.swap(i: i, j: j)
-//        view.redraw()
-//     }
-//     
+     public func swap(i: Int, j: Int){ //this method seems to leak memory
+        view.swap(i: i, j: j)
+        view.redraw()
+     }
+//
 //     same happened to the select(i: Int , j: Int) method
 //     
 //     I don't really know what may be causing this, but consider this a bug report
 
     
-    public func swap(i: Int, j: Int) -> Bool{
-        view.swap(i: i, j: j)
-        view.redraw()
-        return true
-    }
+//    public func swap(i: Int, j: Int) -> Bool{
+//        view.swap(i: i, j: j)
+//        view.redraw()
+//        return true
+//    }
     
     public func select(i: Int, j: Int) -> Bool{
         view.select(i: i, j: j)
